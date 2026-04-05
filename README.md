@@ -3,7 +3,7 @@
 <div align="center">
   <h3 align="center">insurance-claims-etl-pipeline</h3>
   <p align="center">
-    A local Python ETL pipeline built on CMS synthetic Medicare data — extract, transform, validate, and explore claims in a Streamlit dashboard.
+    A local Python ETL pipeline built on CMS synthetic Medicare data - extract, transform, validate, and explore claims in a Streamlit dashboard.
   </p>
 </div>
 
@@ -14,10 +14,10 @@
 
 The project demonstrates a real, end-to-end ETL workflow:
 
-* **Extract** — read beneficiary, inpatient, outpatient, and prescription event source files from a local `data/` folder
-* **Transform** — standardize dates and identifiers, derive patient and claim metrics, and model dimensions and facts
-* **Validate** — run Great Expectations data quality checks on medical claims and prescription events
-* **Load** — write the final warehouse tables into a local `claims_warehouse.db`
+* **Extract** - read beneficiary, inpatient, outpatient, and prescription event source files from a local `data/` folder
+* **Transform** - standardize dates and identifiers, derive patient and claim metrics, and model dimensions and facts
+* **Validate** - run Great Expectations data quality checks on medical claims and prescription events
+* **Load** - write the final warehouse tables into a local `claims_warehouse.db`
 
 Everything runs locally using free, open source tools only. No API keys, no cloud services, and no paid infrastructure required.
 
@@ -129,7 +129,7 @@ The transform step produces the following derived fields:
 <!-- DASHBOARD -->
 ## Dashboard
 
-The Streamlit dashboard includes always-visible KPI cards and global filters for year, claim type, age group, and state.
+The Streamlit dashboard includes visible KPI cards and global filters for year, claim type, age group, and state.
 
 ### KPI Cards
 
