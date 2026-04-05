@@ -1,0 +1,5 @@
+great-expectations==0.18.21
+pandas==2.2.3
+pyarrow==18.1.0
+SQLAlchemy==1.4.54
+streamlit==1.41.1
