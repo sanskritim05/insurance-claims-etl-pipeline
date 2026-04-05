@@ -79,16 +79,13 @@ REQUIRED_SOURCE_COLUMNS = {
     "prescription_events": {"desynpuf_id", "pde_id", "srvc_dt", "prod_srvc_id", "days_suply_num", "tot_rx_cst_amt"},
 }
 
-
 def to_snake_case(value: str) -> str:
     cleaned = value.strip().replace("/", " ").replace("-", " ").replace(".", " ")
     tokens = [token for token in cleaned.replace("__", "_").split() if token]
     return "_".join(tokens).lower()
 
-
 def _find_csv_files(data_dir: Path) -> list[Path]:
     return sorted(path for path in data_dir.glob("*.csv") if path.is_file())
-
 
 def _find_source_file(data_dir: Path, pattern: str, source_name: str) -> Path:
     matches = sorted(path for path in data_dir.glob(pattern) if path.is_file())
@@ -106,7 +103,6 @@ def _find_source_file(data_dir: Path, pattern: str, source_name: str) -> Path:
         )
     return matches[0]
 
-
 def _validate_source_columns(source_name: str, dataframe: pd.DataFrame) -> None:
     available = set(dataframe.columns)
     required = REQUIRED_SOURCE_COLUMNS[source_name]
@@ -116,7 +112,6 @@ def _validate_source_columns(source_name: str, dataframe: pd.DataFrame) -> None:
             f"{source_name} is missing required columns: {missing}. "
             f"Available columns: {sorted(available)}"
         )
-
 
 def _read_source_csv(csv_path: Path, source_name: str) -> pd.DataFrame:
     LOGGER.info("Reading %s from %s", source_name, csv_path.resolve())
@@ -133,7 +128,6 @@ def _read_source_csv(csv_path: Path, source_name: str) -> pd.DataFrame:
     LOGGER.info("%s columns: %s", source_name, list(dataframe.columns))
     LOGGER.info("%s sample rows:\n%s", source_name, dataframe.head(5).to_string(index=False))
     return dataframe
-
 
 def extract_datasets(data_dir: str | Path = "data") -> dict[str, pd.DataFrame]:
     data_path = Path(data_dir)
