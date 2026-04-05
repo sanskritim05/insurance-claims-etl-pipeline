@@ -1,16 +1,3 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a id="readme-top"></a>
-
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -22,48 +9,12 @@
 
   <p align="center">
     A local Python ETL pipeline built on CMS synthetic Medicare data — extract, transform, validate, and explore claims in a Streamlit dashboard.
-    <br />
-    <a href="https://github.com/your_username/insurance-claims-etl-pipeline"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/your_username/insurance-claims-etl-pipeline">View Demo</a>
-    &middot;
-    <a href="https://github.com/your_username/insurance-claims-etl-pipeline/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
-    &middot;
-    <a href="https://github.com/your_username/insurance-claims-etl-pipeline/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
 
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#warehouse-design">Warehouse Design</a></li>
-    <li><a href="#dashboard">Dashboard</a></li>
-    <li><a href="#example-sql-queries">Example SQL Queries</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+
 
 
 
@@ -83,7 +34,6 @@ The project demonstrates a real, end-to-end ETL workflow:
 
 Everything runs locally using free, open source tools only. No API keys, no cloud services, and no paid infrastructure required.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -95,7 +45,6 @@ Everything runs locally using free, open source tools only. No API keys, no clou
 * [![Streamlit][Streamlit.io]][Streamlit-url]
 * [![Great Expectations][GreatExpectations.io]][GreatExpectations-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -129,7 +78,6 @@ Follow these steps to get a local copy up and running.
    python run_pipeline.py --list-files
    ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -166,7 +114,6 @@ After the ETL completes:
 python -m streamlit run dashboard/app.py
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -202,11 +149,6 @@ The transform step produces the following derived fields:
 * Claim duration in days
 * Cost per day
 
-> **Note:** `provider_state` is inferred from the most common patient state associated with each provider in the claims data. `drug_name` and `drug_category` are derived from the product service code because the CMS sample does not ship with a user-friendly drug catalog.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
 
 <!-- DASHBOARD -->
 ## Dashboard
@@ -232,7 +174,6 @@ The Streamlit dashboard includes always-visible KPI cards and global filters for
 | **Provider** | Top providers by volume and cost, provider state breakdown |
 | **Prescription** | Top prescribed drugs, total drug cost over time, average days supply by drug category |
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -295,76 +236,12 @@ ORDER BY chronic_conditions_count DESC
 LIMIT 10;
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-<!-- ROADMAP -->
-## Roadmap
-
-- [x] Multi-source CMS extraction
-- [x] Star-schema SQLite warehouse
-- [x] Great Expectations validation
-- [x] Streamlit dashboard with KPI cards and tabbed views
-- [ ] dbt model layer for warehouse transformations
-- [ ] Docker Compose for one-command setup
-- [ ] Support for additional CMS year files (2009, 2010)
-- [ ] Export dashboard views to PDF
-
-See the [open issues](https://github.com/your_username/insurance-claims-etl-pipeline/issues) for a full list of proposed features and known issues.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also open an issue with the tag `enhancement`. Don't forget to give the project a star!
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a pull request
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name — [@your_twitter](https://twitter.com/your_username) — email@example.com
-
-Project Link: [https://github.com/your_username/insurance-claims-etl-pipeline](https://github.com/your_username/insurance-claims-etl-pipeline)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* [CMS Synthetic Medicare Data](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs)
-* [Great Expectations](https://greatexpectations.io)
-* [Streamlit](https://streamlit.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [Img Shields](https://shields.io)
-* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
