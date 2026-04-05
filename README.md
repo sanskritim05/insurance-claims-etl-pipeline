@@ -1,19 +1,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-
   <h3 align="center">insurance-claims-etl-pipeline</h3>
-
   <p align="center">
     A local Python ETL pipeline built on CMS synthetic Medicare data — extract, transform, validate, and explore claims in a Streamlit dashboard.
   </p>
 </div>
-
-
-
-
-
-
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
@@ -29,9 +21,6 @@ The project demonstrates a real, end-to-end ETL workflow:
 
 Everything runs locally using free, open source tools only. No API keys, no cloud services, and no paid infrastructure required.
 
-
-
-
 ### Built With
 
 * [![Python][Python.org]][Python-url]
@@ -39,9 +28,6 @@ Everything runs locally using free, open source tools only. No API keys, no clou
 * [![Pandas][Pandas.pydata.org]][Pandas-url]
 * [![Streamlit][Streamlit.io]][Streamlit-url]
 * [![Great Expectations][GreatExpectations.io]][GreatExpectations-url]
-
-
-
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -72,8 +58,6 @@ Follow these steps to get a local copy up and running.
    ```sh
    python run_pipeline.py --list-files
    ```
-
-
 
 
 <!-- USAGE -->
@@ -108,9 +92,6 @@ After the ETL completes:
 ```sh
 python -m streamlit run dashboard/app.py
 ```
-
-
-
 
 <!-- WAREHOUSE DESIGN -->
 ## Warehouse Design
