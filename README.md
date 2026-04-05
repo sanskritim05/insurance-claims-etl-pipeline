@@ -1,9 +1,6 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/your_username/insurance-claims-etl-pipeline">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
 
   <h3 align="center">insurance-claims-etl-pipeline</h3>
 
@@ -20,8 +17,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Screenshot][product-screenshot]](https://example.com)
 
 `insurance-claims-etl-pipeline` is a local Python ETL project built on CMS synthetic Medicare sample data. It extracts four source files, transforms them into a clean analytics model, validates output with Great Expectations, and loads the results into a SQLite warehouse for exploration in Streamlit.
 
