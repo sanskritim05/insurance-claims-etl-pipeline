@@ -27,7 +27,6 @@ Everything runs locally using free, open source tools only. No API keys, no clou
 * [![SQLite][SQLite.org]][SQLite-url]
 * [![Pandas][Pandas.pydata.org]][Pandas-url]
 * [![Streamlit][Streamlit.io]][Streamlit-url]
-* [![Great Expectations][GreatExpectations.io]][GreatExpectations-url]
 
 <!-- GETTING STARTED -->
 ## Getting Started
