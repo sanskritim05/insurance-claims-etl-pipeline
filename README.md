@@ -1,193 +1,242 @@
-# insurance-claims-etl-pipeline
+<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
+<a id="readme-top"></a>
 
-## Overview
+<!-- PROJECT SHIELDS -->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-`insurance-claims-etl-pipeline` is a local Python ETL project built on CMS synthetic Medicare sample data. It extracts four source files, transforms them into a clean analytics model, validates the output with Great Expectations, and loads the results into a SQLite warehouse for analysis in Streamlit.
 
-The project is designed to clearly demonstrate a real ETL workflow:
 
-- `Extract`: read beneficiary, inpatient, outpatient, and prescription event source files from the local `data/` folder
-- `Transform`: standardize dates and identifiers, derive patient and claim metrics, model dimensions and facts, and run data quality checks
-- `Load`: write the final warehouse tables into `claims_warehouse.db`
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/your_username/insurance-claims-etl-pipeline">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-## Data Sources
+  <h3 align="center">insurance-claims-etl-pipeline</h3>
 
-Place these CMS files in the `data/` directory:
+  <p align="center">
+    A local Python ETL pipeline built on CMS synthetic Medicare data — extract, transform, validate, and explore claims in a Streamlit dashboard.
+    <br />
+    <a href="https://github.com/your_username/insurance-claims-etl-pipeline"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/your_username/insurance-claims-etl-pipeline">View Demo</a>
+    &middot;
+    <a href="https://github.com/your_username/insurance-claims-etl-pipeline/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    &middot;
+    <a href="https://github.com/your_username/insurance-claims-etl-pipeline/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+  </p>
+</div>
 
-- `2008 Beneficiary Summary File`
-  Contains patient demographics, age, gender, race, ESRD indicator, and chronic condition flags
-- `Inpatient Claims`
-  Contains hospital stays, diagnosis codes, procedure codes, claim dates, and claim costs
-- `Outpatient Claims`
-  Contains outpatient visits, diagnosis codes, claim dates, and claim costs
-- `Prescription Drug Events`
-  Contains drug codes, quantity dispensed, days supply, patient payment, and total drug cost
 
-## Project Structure
 
-```text
-insurance-claims-etl-pipeline/
-├── data/
-│   └── .gitkeep
-├── etl/
-│   ├── extract.py
-│   ├── transform.py
-│   ├── load.py
-│   └── quality_checks.py
-├── dashboard/
-│   └── app.py
-├── run_pipeline.py
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#warehouse-design">Warehouse Design</a></li>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#example-sql-queries">Example SQL Queries</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+  </ol>
+</details>
 
-Generated artifacts such as the SQLite database and processed CSV outputs are created only after the pipeline runs and are intentionally excluded from source control.
 
-## Warehouse Design
 
-The pipeline builds a local star-schema style warehouse with these tables:
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-### Dimensions
+[![Product Screenshot][product-screenshot]](https://example.com)
 
-- `dim_patient`
-  Patient demographics, age, age group, race, state, ESRD indicator, and chronic condition flags
-- `dim_provider`
-  Provider identifier, provider type, and inferred provider state
-- `dim_date`
-  Calendar dimension for analysis by year, quarter, month, and day
-- `dim_diagnosis`
-  ICD diagnosis code and description
-- `dim_drug`
-  Drug code, derived drug name, and derived drug category
+`insurance-claims-etl-pipeline` is a local Python ETL project built on CMS synthetic Medicare sample data. It extracts four source files, transforms them into a clean analytics model, validates output with Great Expectations, and loads the results into a SQLite warehouse for exploration in Streamlit.
 
-### Facts
+The project demonstrates a real, end-to-end ETL workflow:
 
-- `fact_inpatient_claims`
-  One row per inpatient claim
-- `fact_outpatient_claims`
-  One row per outpatient claim
-- `fact_prescriptions`
-  One row per prescription event
+* **Extract** — read beneficiary, inpatient, outpatient, and prescription event source files from a local `data/` folder
+* **Transform** — standardize dates and identifiers, derive patient and claim metrics, and model dimensions and facts
+* **Validate** — run Great Expectations data quality checks on medical claims and prescription events
+* **Load** — write the final warehouse tables into a local `claims_warehouse.db`
 
-## Features
+Everything runs locally using free, open source tools only. No API keys, no cloud services, and no paid infrastructure required.
 
-### ETL Pipeline
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- Multi-source extraction from four CMS files
-- Cleaning and standardization of source fields
-- Derived metrics such as:
-  - age group
-  - chronic condition count
-  - claim duration in days
-  - cost per day
-- Great Expectations validation for medical claims and prescription events
-- Local SQLite warehouse loading with a reproducible rebuild process
 
-### Streamlit Dashboard
 
-- Always-visible KPI cards
-- Global filters for:
-  - year
-  - claim type
-  - age group
-  - state
-- Tabbed analysis for:
-  - patient insights
-  - claims analysis
-  - diagnosis analysis
-  - provider analysis
-  - prescription analysis
+### Built With
 
-## Setup
+* [![Python][Python.org]][Python-url]
+* [![SQLite][SQLite.org]][SQLite-url]
+* [![Pandas][Pandas.pydata.org]][Pandas-url]
+* [![Streamlit][Streamlit.io]][Streamlit-url]
+* [![Great Expectations][GreatExpectations.io]][GreatExpectations-url]
 
-### 1. Create a virtual environment
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
 
-### 2. Install dependencies
 
-```bash
-python -m pip install -r requirements.txt
-```
+<!-- GETTING STARTED -->
+## Getting Started
 
-### 3. Confirm the CMS files are present
+Follow these steps to get a local copy up and running.
 
-```bash
-python run_pipeline.py --list-files
-```
+### Prerequisites
 
-## Running the ETL Pipeline
+* Python 3.8 or later
+* The four CMS synthetic Medicare sample files (see [Data Sources](#data-sources) below)
 
-From the project root:
+### Installation
 
-```bash
+1. Clone the repo
+   ```sh
+   git clone https://github.com/your_username/insurance-claims-etl-pipeline.git
+   ```
+2. Create and activate a virtual environment
+   ```sh
+   python -m venv .venv
+   source .venv/bin/activate
+   ```
+3. Install dependencies
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. Place CMS source files in the `data/` directory and confirm they are detected
+   ```sh
+   python run_pipeline.py --list-files
+   ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE -->
+## Usage
+
+### Data Sources
+
+Place these CMS files in the `data/` directory before running the pipeline:
+
+| File | Description |
+|------|-------------|
+| `2008 Beneficiary Summary File` | Patient demographics, age, gender, race, ESRD indicator, and chronic condition flags |
+| `Inpatient Claims` | Hospital stays, diagnosis codes, procedure codes, claim dates, and claim costs |
+| `Outpatient Claims` | Outpatient visits, diagnosis codes, claim dates, and claim costs |
+| `Prescription Drug Events` | Drug codes, quantity dispensed, days supply, patient payment, and total drug cost |
+
+### Run the ETL Pipeline
+
+```sh
 python run_pipeline.py
 ```
 
 This creates:
+* `claims_warehouse.db` — the SQLite analytics warehouse
+* `data/processed/` — processed CSV exports
+* `data/processed/transform_metadata.json` — transformation metadata
 
-- `claims_warehouse.db`
-- processed CSV exports in `data/processed/`
-- transformation metadata in `data/processed/transform_metadata.json`
-
-## Running the Dashboard
+### Run the Dashboard
 
 After the ETL completes:
 
-```bash
+```sh
 python -m streamlit run dashboard/app.py
 ```
 
-## Dashboard Views
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- WAREHOUSE DESIGN -->
+## Warehouse Design
+
+The pipeline builds a local star-schema style warehouse.
+
+### Dimensions
+
+| Table | Description |
+|-------|-------------|
+| `dim_patient` | Demographics, age group, race, state, ESRD indicator, and chronic condition flags |
+| `dim_provider` | Provider identifier, type, and inferred provider state |
+| `dim_date` | Calendar dimension for year, quarter, month, and day analysis |
+| `dim_diagnosis` | ICD code and description |
+| `dim_drug` | Drug code, derived drug name, and derived drug category |
+
+### Facts
+
+| Table | Description |
+|-------|-------------|
+| `fact_inpatient_claims` | One row per inpatient claim |
+| `fact_outpatient_claims` | One row per outpatient claim |
+| `fact_prescriptions` | One row per prescription event |
+
+### Derived Metrics
+
+The transform step produces the following derived fields:
+
+* Age group
+* Chronic condition count
+* Claim duration in days
+* Cost per day
+
+> **Note:** `provider_state` is inferred from the most common patient state associated with each provider in the claims data. `drug_name` and `drug_category` are derived from the product service code because the CMS sample does not ship with a user-friendly drug catalog.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- DASHBOARD -->
+## Dashboard
+
+The Streamlit dashboard includes always-visible KPI cards and global filters for year, claim type, age group, and state.
 
 ### KPI Cards
 
-- Total number of claims
-- Total cost across all claims
-- Average cost per claim
-- Average length of hospital stay in days
-- Total unique patients
-- Total unique providers
+* Total number of claims
+* Total cost across all claims
+* Average cost per claim
+* Average length of hospital stay
+* Total unique patients
+* Total unique providers
 
-### Patient Tab
+### Tabs
 
-- Age group distribution
-- Gender breakdown
-- Top states by claim volume
-- Chronic condition prevalence
-- Average cost by age group
+| Tab | Contents |
+|-----|----------|
+| **Patient** | Age group distribution, gender breakdown, top states by claim volume, chronic condition prevalence, average cost by age group |
+| **Claims** | Claim volume by month, inpatient vs outpatient split, average claim duration, cost distribution histogram, top 10 most expensive claims |
+| **Diagnosis** | Top diagnoses by cost and count, average cost per diagnosis, searchable ICD lookup table |
+| **Provider** | Top providers by volume and cost, provider state breakdown |
+| **Prescription** | Top prescribed drugs, total drug cost over time, average days supply by drug category |
 
-### Claims Tab
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- Claim volume by month
-- Inpatient vs outpatient split
-- Average claim duration by claim type
-- Cost distribution histogram
-- Top 10 most expensive individual claims
 
-### Diagnosis Tab
 
-- Top diagnoses by total cost
-- Top diagnoses by claim count
-- Average cost per diagnosis
-- Searchable ICD lookup table
-
-### Provider Tab
-
-- Top providers by claims volume
-- Top providers by total cost
-- Provider state breakdown
-
-### Prescription Tab
-
-- Top prescribed drugs by volume
-- Total drug cost over time
-- Average days supply by drug category
-
+<!-- EXAMPLE SQL QUERIES -->
 ## Example SQL Queries
 
 ### Top inpatient diagnoses by total cost
@@ -246,9 +295,100 @@ ORDER BY chronic_conditions_count DESC
 LIMIT 10;
 ```
 
-## Notes
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-- Everything runs locally with free, open source tools only.
-- No API keys, no cloud services, and no paid infrastructure are required.
-- `provider_state` is inferred from the most common patient state associated with each provider in the claims data.
-- `drug_name` and `drug_category` are derived from the available product service code because the CMS sample does not ship with a user-friendly drug catalog.
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+- [x] Multi-source CMS extraction
+- [x] Star-schema SQLite warehouse
+- [x] Great Expectations validation
+- [x] Streamlit dashboard with KPI cards and tabbed views
+- [ ] dbt model layer for warehouse transformations
+- [ ] Docker Compose for one-command setup
+- [ ] Support for additional CMS year files (2009, 2010)
+- [ ] Export dashboard views to PDF
+
+See the [open issues](https://github.com/your_username/insurance-claims-etl-pipeline/issues) for a full list of proposed features and known issues.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also open an issue with the tag `enhancement`. Don't forget to give the project a star!
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a pull request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE.txt` for more information.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Your Name — [@your_twitter](https://twitter.com/your_username) — email@example.com
+
+Project Link: [https://github.com/your_username/insurance-claims-etl-pipeline](https://github.com/your_username/insurance-claims-etl-pipeline)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- ACKNOWLEDGMENTS -->
+## Acknowledgments
+
+* [CMS Synthetic Medicare Data](https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs)
+* [Great Expectations](https://greatexpectations.io)
+* [Streamlit](https://streamlit.io)
+* [Choose an Open Source License](https://choosealicense.com)
+* [Img Shields](https://shields.io)
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/your_username/insurance-claims-etl-pipeline.svg?style=for-the-badge
+[contributors-url]: https://github.com/your_username/insurance-claims-etl-pipeline/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/your_username/insurance-claims-etl-pipeline.svg?style=for-the-badge
+[forks-url]: https://github.com/your_username/insurance-claims-etl-pipeline/network/members
+[stars-shield]: https://img.shields.io/github/stars/your_username/insurance-claims-etl-pipeline.svg?style=for-the-badge
+[stars-url]: https://github.com/your_username/insurance-claims-etl-pipeline/stargazers
+[issues-shield]: https://img.shields.io/github/issues/your_username/insurance-claims-etl-pipeline.svg?style=for-the-badge
+[issues-url]: https://github.com/your_username/insurance-claims-etl-pipeline/issues
+[license-shield]: https://img.shields.io/github/license/your_username/insurance-claims-etl-pipeline.svg?style=for-the-badge
+[license-url]: https://github.com/your_username/insurance-claims-etl-pipeline/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/your_username
+[product-screenshot]: images/screenshot.png
+[Python.org]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
+[Python-url]: https://python.org
+[SQLite.org]: https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white
+[SQLite-url]: https://sqlite.org
+[Pandas.pydata.org]: https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white
+[Pandas-url]: https://pandas.pydata.org
+[Streamlit.io]: https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white
+[Streamlit-url]: https://streamlit.io
+[GreatExpectations.io]: https://img.shields.io/badge/Great%20Expectations-FF6310?style=for-the-badge&logoColor=white
+[GreatExpectations-url]: https://greatexpectations.io
