@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 import sqlite3
 from pathlib import Path
-
 import altair as alt
 import pandas as pd
 import streamlit as st
@@ -14,17 +13,14 @@ PROCESSED_METADATA_PATH = PROJECT_ROOT / "data" / "processed" / "transform_metad
 
 st.set_page_config(page_title="Insurance Claims ETL Dashboard", layout="wide")
 
-
 def _run_query(query: str, params: tuple = ()) -> pd.DataFrame:
     with sqlite3.connect(DATABASE_PATH) as connection:
         return pd.read_sql_query(query, connection, params=params)
-
 
 def _load_metadata() -> dict:
     if not PROCESSED_METADATA_PATH.exists():
         return {}
     return json.loads(PROCESSED_METADATA_PATH.read_text(encoding="utf-8"))
-
 
 def _medical_union_subquery(claim_type: str) -> str:
     parts = []
